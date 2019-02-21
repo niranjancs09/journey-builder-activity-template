@@ -9,11 +9,11 @@ define([
     var authTokens = {};
     var payload = {};
     $(window).ready(onRender);
-
+    $(window).ready(save);
     connection.on('initActivity', initialize);
     connection.on('requestedTokens', onGetTokens);
     connection.on('requestedEndpoints', onGetEndpoints);
-
+    connection.on('onLoad', save);
     connection.on('clickedNext', save);
    
     function onRender() {
@@ -66,18 +66,20 @@ define([
     }
 
     function save() {
-        var postcardURLValue = $('#postcard-url').val();
-        var postcardTextValue = $('#postcard-text').val();
-
-        payload['arguments'].execute.inArguments = [{
+    payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
             "emailAddress": "{{Contact.Attribute.PostmanAPIInsertData.Email}}"
         }];
-        
+        console.log(payload["arguments"]["execute"]["inArguments"][0]["emailAddress"]);
         payload['metaData'].isConfigured = true;
 
         console.log(payload);
         connection.trigger('updateActivity', payload);
+        connection.on('requestedSchema', function (data) {    //CONNECTION ON
+        // save schema
+        console.log('*** Schema ***', JSON.stringify(data['schema']));
+        let schema = JSON.stringify(data['schema']);
+    });
     }
 
 
