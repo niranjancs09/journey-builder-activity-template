@@ -16,7 +16,10 @@
     "arguments": {
         "execute": {
            "inArguments":[
-													
+				
+		 		{
+				  "EmailAddress": "{{Contact.Attribute.PostmanAPIInsertData.EmailAddress}}"
+				}									
 			],
           "outArguments": [],
           "url": "https://custom-journey-builder.herokuapp.com/journeybuilder/execute",
