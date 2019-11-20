@@ -16,9 +16,11 @@
     "arguments": {
         "execute": {
            "inArguments":[
-				
-		 		{
-				  "EmailAddress": "{{Contact.Attribute.PostmanAPIInsertData.Email}}"
+				{
+                    		    "contactIdentifier": "{{Contact.Key}}"
+				},
+				{
+				    "emailAddress": "{{InteractionDefaults.Email}}"
 				}									
 			],
           "outArguments": [],
